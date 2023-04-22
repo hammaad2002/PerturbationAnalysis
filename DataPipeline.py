@@ -129,7 +129,7 @@ class DataTransform(object):
                 epsilon = kwargs['epsilon']
                 c = kwargs['c']
                 learning_rate = kwargs['learning_rate']
-                num_ter = kwargs['num_iter']
+                num_iter = kwargs['num_iter']
                 decrease_factor_eps = kwargs['decrease_factor_eps']
                 num_iter_decrease_eps = kwargs['num_iter_decrease_eps']
                 optimizer = kwargs['optimizer']
