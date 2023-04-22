@@ -18,7 +18,7 @@ class DataTransform(object):
         self.attack = attack
 
 
-    def random_transcription_generator(data, sentences_for_dict = 100, create_sentences = 20):
+    def random_transcription_generator(self, data, sentences_for_dict = 100, create_sentences = 20):
   
         #creating our dictionary of words and storing original transcription
         original_transcription = []
