@@ -5,7 +5,7 @@ import torch
 import librosa
 import datasets
 import re
-import random_word
+import random
 
 class DataTransform(object):
     '''
