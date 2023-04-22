@@ -222,7 +222,7 @@ class DataTransform(object):
             zc.append(zcr1)
         return zc
   
-    def feature_combiner(self, zc_clean, stft_clean, zc_pert, stft_pert) -> Tuple(List, List):
+    def feature_combiner(self, zc_clean, stft_clean, zc_pert, stft_pert) -> Tuple[List, List]:
         '''
         This method combines two features (zero_crossing and STFT) into a horizontal flattened array.
         Args:
