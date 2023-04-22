@@ -23,7 +23,7 @@ class DataTransform(object):
         #creating our dictionary of words and storing original transcription
         original_transcription = []
         dictionary_of_words = []
-        for _, sentence in enumerate(data):
+        for _, sentence in enumerate(data[:sentences_for_dict]):
             original_transcription.append(sentence.upper())
             for _, word in enumerate(sentence.split(" ")):
                 dictionary_of_words.append(word)
