@@ -4,6 +4,8 @@ import numpy as np
 import torch
 import librosa
 import datasets
+import re
+import random_word
 
 class DataTransform(object):
     '''
@@ -14,6 +16,47 @@ class DataTransform(object):
         self.device = device
         self.model = model  
         self.attack = attack
+
+
+    def random_transcription_generator(data, sentences_for_dict = 100, create_sentences = 20):
+  
+        #creating our dictionary of words and storing original transcription
+        original_transcription = []
+        dictionary_of_words = []
+        for _, sentence in enumerate(data):
+            original_transcription.append(sentence.upper())
+            for _, word in enumerate(sentence.split(" ")):
+                dictionary_of_words.append(word)
+
+        #remove redundant words
+        dictionary_of_words = list(set(dictionary_of_words))
+
+        #removing unneccessary characters from our created dictionary
+        removeSymbol = '[\,\?\.\!\-\;\:\"]'
+        dictionary_of_words_new = []
+        for i in range(len(dictionary_of_words)):
+            dictionary_of_words_new.append(re.sub(removeSymbol, '', dictionary_of_words[i]).upper())
+
+        #removing unneccessary characters from our original trancription also
+        original_transcription_new = []
+        for i in range(len(original_transcription)):
+            original_transcription_new.append(re.sub(removeSymbol, '', original_transcription[i]).upper())  
+
+        #generating random transcription whose no. of words is equal to the ground truth
+        random_transcription = []
+        for _, sentence in enumerate(original_transcription_new[:create_sentences]):
+            temp_sentence = ""
+            for i in range(len(sentence.split(" "))):
+                random_word = random.choice(dictionary_of_words_new)
+                if i == len(sentence.split(" "))-1:
+                    temp_sentence += random_word
+                else:
+                    temp_sentence += random_word + " "
+            random_transcription.append(temp_sentence)
+  
+        return np.array(original_transcription_new[:create_sentences]), np.array(random_transcription)
+
+
     def apply_attack(self, attack: str, data: datasets.dataset_dict.DatasetDict, **kwargs) -> Tuple[List, List]:
         '''
         Applies attack on the subset of data provided to it.
