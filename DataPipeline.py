@@ -84,7 +84,7 @@ class DataTransform(object):
                     targeted = kwargs['targeted']
                     assert kwargs['target'] != None
                     target = kwargs['target']
-                    temp = self.attack.FGSM_ATTACK(timit_audio_tensor, target, epsilon = epsilon, 
+                    temp = self.attack.FGSM_ATTACK(timit_audio_tensor, target[i], epsilon = epsilon, 
                                                    targeted = targeted)
                 else:
                     targeted = kwargs['targeted']
@@ -99,7 +99,7 @@ class DataTransform(object):
                     targeted = kwargs['targeted']
                     assert kwargs['target'] != None
                     target = kwargs['target']
-                    temp = self.attack.BIM_ATTACK(timit_audio_tensor, target, epsilon = epsilon, 
+                    temp = self.attack.BIM_ATTACK(timit_audio_tensor, target[i], epsilon = epsilon, 
                                                   alpha = alpha, num_iter = num_iter, 
                                                   targeted = targeted)
                 else:
@@ -116,7 +116,7 @@ class DataTransform(object):
                     targeted = kwargs['targeted']
                     assert kwargs['target'] != None
                     target = kwargs['target']
-                    temp = self.attack.PGD_ATTACK(timit_audio_tensor, target, epsilon = epsilon, 
+                    temp = self.attack.PGD_ATTACK(timit_audio_tensor, target[i], epsilon = epsilon, 
                                                   alpha = alpha, num_iter = num_iter, 
                                                   targeted = targeted)
                 else:
@@ -140,7 +140,7 @@ class DataTransform(object):
                     targeted = kwargs['targeted']
                     assert kwargs['target'] != None
                     target = kwargs['target']
-                    temp = self.attack.CW_ATTACK(timit_audio_tensor, target, epsilon = epsilon,
+                    temp = self.attack.CW_ATTACK(timit_audio_tensor, target[i], epsilon = epsilon,
                                                 c = c, learning_rate = learning_rate, 
                                                 num_iter = num_iter, 
                                                 decrease_factor_eps = decrease_factor_eps,
@@ -177,7 +177,7 @@ class DataTransform(object):
                 search_eps_cw = kwargs['search_eps_cw']
                 alpha = kwargs['alpha']
                 temp = self.attack.IMPERCEPTIBLE_ATTACK(torch.nn.functional.pad(timit_audio_tensor, (0, 1000)), 
-                                                        target, epsilon = epsilon, c = c, 
+                                                        target[i], epsilon = epsilon, c = c, 
                                                         learning_rate1 = learning_rate1, 
                                                         learning_rate2 = learning_rate2, 
                                                         num_iter1 = num_iter1, 
