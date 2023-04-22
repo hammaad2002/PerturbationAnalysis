@@ -149,7 +149,7 @@ class DataTransform(object):
                                                         alpha = alpha)
 
             emp2.append(torch.from_numpy(temp))
-            return np.array(emp1), np.array(emp2)
+        return np.array(emp1), np.array(emp2)
   
     def pad_audios(self, audios: np.ndarray) -> np.ndarray:
         '''
