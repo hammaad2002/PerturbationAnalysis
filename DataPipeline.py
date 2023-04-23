@@ -17,9 +17,17 @@ class DataTransform(object):
         self.model = model  
         self.attack = attack
 
+    def random_transcription_generator(self, data: datasets.dataset_dict.DatasetDict, sentences_for_dict: int = 100, create_sentences: int = 20) -> Tuple[np.ndarray, np.ndarray]:
+        '''
+        Generates random transcription in batch with the same vocabulary as that of the dataset provided.
+        Args:
 
-    def random_transcription_generator(self, data, sentences_for_dict = 100, create_sentences = 20):
-  
+        data   : Subset of huggingface dataset for audio
+        sentences_for_dict : number of sentences to use for creating dictionary from which words will be chosen randomly for creating random transcription
+        create_sentences   : number of example of batch transcription to generate using this method
+
+        Returns
+        '''
         #creating our dictionary of words and storing original transcription
         original_transcription = []
         dictionary_of_words = []
@@ -57,7 +65,7 @@ class DataTransform(object):
         return np.array(original_transcription_new[:create_sentences]), np.array(random_transcription)
 
 
-    def apply_attack(self, attack: str, data: datasets.dataset_dict.DatasetDict, **kwargs) -> Tuple[List, List]:
+    def apply_attack(self, attack: str, data: datasets.dataset_dict.DatasetDict, **kwargs) -> Tuple[np.ndarray, np.ndarray]:
         '''
         Applies attack on the subset of data provided to it.
         Args:
