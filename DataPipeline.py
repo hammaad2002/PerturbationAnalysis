@@ -39,6 +39,9 @@ class DataTransform(object):
         #remove redundant words
         dictionary_of_words = list(set(dictionary_of_words))
 
+        #sorting the list in-place
+        dictionary_of_words.sort()
+
         #removing unneccessary characters from our created dictionary
         removeSymbol = '[\,\?\.\!\-\;\:\"]'
         dictionary_of_words_new = []
