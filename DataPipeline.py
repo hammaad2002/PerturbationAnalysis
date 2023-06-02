@@ -93,7 +93,7 @@ class DataTransform(object):
                 epsilon = kwargs['epsilon']
                 if kwargs['targeted'] == True:
                     targeted = kwargs['targeted']
-                    assert kwargs['target'] is not None, "Target must not be passed for targeted attacks"
+                    assert kwargs['target'] is not None, "Target must be passed for targeted attacks"
                     target = kwargs['target']
                     temp = self.attack.FGSM_ATTACK(timit_audio_tensor, target[i].replace(" ","|"), epsilon = epsilon, 
                                                    targeted = targeted)
@@ -106,35 +106,37 @@ class DataTransform(object):
                 epsilon = kwargs['epsilon']
                 alpha = kwargs['alpha']
                 num_iter = kwargs['num_iter']
+                early_stop = kwargs['early_stop']
                 if kwargs['targeted'] == True:
                     targeted = kwargs['targeted']
-                    assert kwargs['target'] is not None, "Target must not be passed for targeted attacks"
+                    assert kwargs['target'] is not None, "Target must be passed for targeted attacks"
                     target = kwargs['target']
                     temp = self.attack.BIM_ATTACK(timit_audio_tensor, target[i].replace(" ","|"), epsilon = epsilon, 
                                                   alpha = alpha, num_iter = num_iter, 
-                                                  targeted = targeted)
+                                                  targeted = targeted, early_stop = early_stop)
                 else:
                     targeted = kwargs['targeted']
                     temp = self.attack.BIM_ATTACK(timit_audio_tensor, epsilon = epsilon, 
                                                   alpha = alpha, num_iter = num_iter, 
-                                                  targeted = targeted)
+                                                  targeted = targeted, early_stop = early_stop)
 
             elif attack == 'PGD':
                 epsilon = kwargs['epsilon']
                 alpha = kwargs['alpha']
                 num_iter = kwargs['num_iter']
+                early_stop = kwargs['early_stop']
                 if kwargs['targeted'] == True:
                     targeted = kwargs['targeted']
-                    assert kwargs['target'] is not None, "Target must not be passed for targeted attacks"
+                    assert kwargs['target'] is not None, "Target must be passed for targeted attacks"
                     target = kwargs['target']
                     temp = self.attack.PGD_ATTACK(timit_audio_tensor, target[i].replace(" ","|"), epsilon = epsilon, 
                                                   alpha = alpha, num_iter = num_iter, 
-                                                  targeted = targeted)
+                                                  targeted = targeted, early_stop = early_stop)
                 else:
                     targeted = kwargs['targeted']
                     temp = self.attack.PGD_ATTACK(timit_audio_tensor, epsilon = epsilon, 
                                                   alpha = alpha, num_iter = num_iter, 
-                                                  targeted = targeted)
+                                                  targeted = targeted, early_stop = early_stop)
 
             elif attack == 'CW':
                 epsilon = kwargs['epsilon']
@@ -149,7 +151,7 @@ class DataTransform(object):
                 search_eps = kwargs['search_eps']
                 if kwargs['targeted'] == True:
                     targeted = kwargs['targeted']
-                    assert kwargs['target'] is not None, "Target must not be passed for targeted attacks"
+                    assert kwargs['target'] is not None, "Target must be passed for targeted attacks"
                     target = kwargs['target']
                     temp = self.attack.CW_ATTACK(timit_audio_tensor, target[i].replace(" ","|"), epsilon = epsilon,
                                                 c = c, learning_rate = learning_rate, 
@@ -171,7 +173,7 @@ class DataTransform(object):
                                                 targeted = targeted)
 
             elif attack == "IMP_CW":
-                assert kwargs['target'] is not None, "Target must not be passed for targeted attacks"
+                assert kwargs['target'] is not None, "Target must not passed for targeted attacks"
                 target = kwargs['target']
                 epsilon = kwargs['epsilon']
                 c = kwargs['c']
