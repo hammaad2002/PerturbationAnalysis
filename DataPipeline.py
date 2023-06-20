@@ -203,7 +203,8 @@ class DataTransform(object):
                                                         early_stop_cw = early_stop_cw, 
                                                         search_eps_cw = search_eps_cw, 
                                                         alpha = alpha)
-
+                temp = temp[:,:-1000]
+                
             emp2.append(torch.from_numpy(temp))
         return np.array(emp1), np.array(emp2)
   
